@@ -18,6 +18,7 @@ export const AUTH_USER = "AUTH_USER";
 export const SIGN_OUT = "SIGN_OUT";
 export const CHANGE_USER_EMAIL = "CHANGE_USER_EMAIL";
 export const UPDATE_USER_PROFILE = "UPDATE_USER_PROFILE";
+export const VERIFY_ACCOUNT = "VERIFY_ACCOUNT";
 
 // site
 export const SITE_LAYOUT = "SITE_LAYOUT";

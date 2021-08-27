@@ -15,6 +15,7 @@ import {
   CHANGE_USER_EMAIL,
   UPDATE_USER_PROFILE,
   CLEAR_ALL_ARTICLES,
+  VERIFY_ACCOUNT,
 } from "../types";
 
 //////////////////// articles ///////////////////
@@ -92,6 +93,10 @@ export const changeUserEmail = (data) => ({
 export const updateUserProfile = (userdata) => ({
   type: UPDATE_USER_PROFILE,
   payload: userdata,
+});
+
+export const accountVerify = () => ({
+  type: VERIFY_ACCOUNT,
 });
 
 /////// site /////////////

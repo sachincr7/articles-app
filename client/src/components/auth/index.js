@@ -47,7 +47,6 @@ const Auth = (props) => {
 
   useEffect(() => {
     if (isAuth) {
-      console.log("isAuth", isAuth);
       props.history.push("/dashboard");
     }
   }, [isAuth, props.history]);

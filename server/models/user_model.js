@@ -44,6 +44,10 @@ const userSchema = mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  verified: {
+    type: Boolean,
+    default: false,
+  },
 });
 
 userSchema.pre("save", async function (next) {
@@ -66,6 +70,13 @@ userSchema.methods.generateToken = function () {
   let user = this;
   const userObj = { _id: user._id.toHexString(), email: user.email };
   const token = jwt.sign(userObj, process.env.SECRET, { expiresIn: "1d" });
+  return token;
+};
+
+userSchema.methods.generateRegisterToken = function () {
+  let user = this;
+  const userObj = { _id: user._id.toHexString() };
+  const token = jwt.sign(userObj, process.env.SECRET, { expiresIn: "10m" });
   return token;
 };
 

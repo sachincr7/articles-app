@@ -1,8 +1,11 @@
 const express = require("express");
-let router = express.Router();
-require("dotenv").config();
+const { contactMail, registerEmail } = require("../../config/email");
+
 const { checkLoggedIn } = require("../../middleware/auth");
 const { grantAccess } = require("../../middleware/roles");
+
+let router = express.Router();
+require("dotenv").config();
 
 // model
 const { User } = require("../../models/user_model");
@@ -24,8 +27,11 @@ router.route("/register").post(async (req, res) => {
     // 3. generate token
     const token = user.generateToken();
 
-    // 4. Send email
     const doc = await user.save();
+
+    // 4. send email
+    const emailToken = user.generateRegisterToken();
+    await registerEmail(doc.email, emailToken);
 
     // Save and send cookie with token
     res.cookie("x-access-token", token).status(200).send(getUserProps(doc));
@@ -107,6 +113,15 @@ router.route("/isauth").get(checkLoggedIn, async (req, res) => {
   res.status(200).send(getUserProps(req.user));
 });
 
+router.route("/contact").post(async (req, res) => {
+  try {
+    await contactMail(req.body);
+    res.status(200).send("ok");
+  } catch (error) {
+    res.status(400).json({ message: "Sorry, try again later", error: error });
+  }
+});
+
 // Update email
 router
   .route("/update_email")
@@ -161,6 +176,7 @@ const getUserProps = (user) => {
     firstname: user.firstname,
     lastname: user.lastname,
     age: user.age,
+    verified: user.verified,
   };
 };
 

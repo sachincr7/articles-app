@@ -11,12 +11,14 @@ import { isAuthUser } from "./store/actions/users_action";
 import Home from "./components/home";
 import Header from "./components/navigation/header";
 import Auth from "./components/auth";
+import Verification from "./components/auth/verification";
 import Dashboard from "./components/dashboard";
 import Profile from "./components/dashboard/profile";
 import Articles from "./components/dashboard/articles";
 import AddArticle from "./components/dashboard/articles/add";
 import Article from "./components/articles/article";
 import EditArticle from "./components/dashboard/articles/edit";
+import Contact from "./components/contact";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -56,6 +58,7 @@ const Routes = () => {
             <Route exact path="/dashboard" component={AuthGuard(Dashboard)} />
             <Route exact path="/article/:id" component={Article} />
             <Route exact path="/auth" component={Auth} />
+            <Route exact path="/verification" component={Verification} />
             <Route
               path="/dashboard/articles/edit/:id"
               component={AuthGuard(EditArticle, true)}
@@ -66,6 +69,7 @@ const Routes = () => {
               path="/dashboard/articles/add"
               component={AuthGuard(AddArticle, true)}
             />
+            <Route exact path="/contact" component={Contact} />
           </Switch>
         </MainLayout>
       )}

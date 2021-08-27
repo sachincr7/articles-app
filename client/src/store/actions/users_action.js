@@ -111,9 +111,35 @@ export const updateUserProfile = (data) => {
         ...profile.data,
       };
 
-      console.log("userData", userData);
       dispatch(users.updateUserProfile(userData));
       dispatch(users.successGlobal("Profile updated"));
+    } catch (error) {
+      dispatch(users.errorGlobal(error.response.data.message));
+    }
+  };
+};
+
+export const contactUs = (data) => {
+  return async (dispatch) => {
+    try {
+      await axios.post(`/api/user/contact`, data);
+      dispatch(users.successGlobal("We will contact you back"));
+    } catch (error) {
+      dispatch(users.errorGlobal(error.response.data.message));
+    }
+  };
+};
+
+export const accountVerify = (token) => {
+  return async (dispatch, getState) => {
+    try {
+      const user = getState().users.auth;
+      await axios.get(`/api/user/verify?validation=${token}`);
+
+      if (user) {
+        dispatch(users.accountVerify());
+      }
+      dispatch(users.successGlobal("Account verified !!"));
     } catch (error) {
       dispatch(users.errorGlobal(error.response.data.message));
     }
