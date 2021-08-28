@@ -73,6 +73,11 @@ userSchema.methods.generateToken = function () {
   return token;
 };
 
+userSchema.statics.validateToken = function (token) {
+  const verify = jwt.verify(token, process.env.SECRET);
+  return verify;
+};
+
 userSchema.methods.generateRegisterToken = function () {
   let user = this;
   const userObj = { _id: user._id.toHexString() };

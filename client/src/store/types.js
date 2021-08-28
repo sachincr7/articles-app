@@ -22,3 +22,7 @@ export const VERIFY_ACCOUNT = "VERIFY_ACCOUNT";
 
 // site
 export const SITE_LAYOUT = "SITE_LAYOUT";
+
+// categories
+export const GET_CATEGORIES = "GET_CATEGORIES";
+export const ADD_CATEGORY = "ADD_CATEGORY";

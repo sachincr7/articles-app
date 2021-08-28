@@ -50,7 +50,7 @@ const Header = (props) => {
           to="/"
           className="navbar-brand d-flex align-items-center"
         >
-          FlickBase
+          FlickArt
         </Link>
         <SideDrawer users={users} signOutUser={signOutUser} />
       </nav>

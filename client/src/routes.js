@@ -19,6 +19,7 @@ import AddArticle from "./components/dashboard/articles/add";
 import Article from "./components/articles/article";
 import EditArticle from "./components/dashboard/articles/edit";
 import Contact from "./components/contact";
+import Categories from "./components/dashboard/categories";
 
 const Routes = () => {
   const [loading, setLoading] = useState(true);
@@ -68,6 +69,11 @@ const Routes = () => {
               exact
               path="/dashboard/articles/add"
               component={AuthGuard(AddArticle, true)}
+            />
+            <Route
+              exact
+              path="/dashboard/categories"
+              component={AuthGuard(Categories, true)}
             />
             <Route exact path="/contact" component={Contact} />
           </Switch>

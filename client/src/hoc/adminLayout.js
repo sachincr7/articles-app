@@ -2,8 +2,10 @@ import React from "react";
 import { Link as RouterLink } from "react-router-dom";
 
 import { List, ListItem, ListItemText } from "@material-ui/core";
+import { useSelector } from "react-redux";
 
 const AdminLayout = ({ children, section }) => {
+  const users = useSelector((state) => state.users);
   return (
     <>
       <div className="row adminLayout">
@@ -16,9 +18,24 @@ const AdminLayout = ({ children, section }) => {
               <ListItem button component={RouterLink} to="/dashboard/profile">
                 <ListItemText primary="Profile" />
               </ListItem>
-              <ListItem button component={RouterLink} to="/dashboard/articles">
-                <ListItemText primary="Articles" />
-              </ListItem>
+              {users.data.role === "admin" ? (
+                <>
+                  <ListItem
+                    button
+                    component={RouterLink}
+                    to="/dashboard/articles"
+                  >
+                    <ListItemText primary="Articles" />
+                  </ListItem>
+                  <ListItem
+                    button
+                    component={RouterLink}
+                    to="/dashboard/categories"
+                  >
+                    <ListItemText primary="Categories" />
+                  </ListItem>
+                </>
+              ) : null}
             </List>
           </div>
         </nav>

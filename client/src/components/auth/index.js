@@ -6,6 +6,7 @@ import { TextField, Button } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { registerUser, signInUser } from "../../store/actions/users_action";
 import PreventAuthRoute from "../../hoc/preventAuthRoute";
+import { errorHelper } from "../../utils/forms/errorHandler";
 
 const Auth = (props) => {
   const dispatch = useDispatch();
@@ -36,14 +37,6 @@ const Auth = (props) => {
       dispatch(signInUser(values));
     }
   };
-
-  const errorHelper = (formik, values) => ({
-    error: formik.errors[values] && formik.touched[values] ? true : false,
-    helperText:
-      formik.errors[values] && formik.touched[values]
-        ? formik.errors[values]
-        : null,
-  });
 
   useEffect(() => {
     if (isAuth) {

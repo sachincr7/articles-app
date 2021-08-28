@@ -123,7 +123,7 @@ export const getAdminArticle = (id) => {
       );
       dispatch(articles.getArticle(request.data));
     } catch (error) {
-      dispatch(articles.getArticle(error.response.data.message));
+      dispatch(articles.errorGlobal(error.response.data.message));
     }
   };
 };
@@ -139,7 +139,38 @@ export const updateArticle = (article, id) => {
       dispatch(articles.getArticle(newArticle.data));
       dispatch(articles.successGlobal("Update done !!"));
     } catch (error) {
-      dispatch(articles.getArticle("Error try again !!"));
+      dispatch(articles.errorGlobal("Error try again !!"));
+    }
+  };
+};
+
+export const getCategories = () => {
+  return async (dispatch) => {
+    try {
+      const categories = await axios.get(`/api/articles/categories`);
+      dispatch(articles.getCategories(categories.data));
+      // dispatch(articles.successGlobal("Update done !!"));
+    } catch (error) {
+      dispatch(articles.errorGlobal("Error try again !!"));
+    }
+  };
+};
+
+export const addCategory = (values) => {
+  return async (dispatch, getState) => {
+    try {
+      const category = await axios.post(
+        `/api/articles/categories`,
+        values,
+        getAuthHeader()
+      );
+
+      let newState = [...getState().articles.categories, category.data];
+
+      dispatch(articles.addCategory(newState));
+      dispatch(articles.successGlobal("Category added !!"));
+    } catch (error) {
+      dispatch(articles.errorGlobal("Error, try again !"));
     }
   };
 };

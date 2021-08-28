@@ -14,12 +14,21 @@ let grantsObject = {
       "update:any": ["*"],
       "delete:any": ["*"],
     },
+    categories: {
+      "create:any": ["*"],
+      "read:any": ["*"],
+      "update:any": ["*"],
+      "delete:any": ["*"],
+    },
   },
   user: {
     profile: {
       "read:own": ["*", "!password", "!date", "!_id"],
       "update:own": ["*"],
       "delete:own": ["*"],
+    },
+    categories: {
+      "read:any": ["*"],
     },
   },
 };

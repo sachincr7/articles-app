@@ -16,6 +16,8 @@ import {
   UPDATE_USER_PROFILE,
   CLEAR_ALL_ARTICLES,
   VERIFY_ACCOUNT,
+  GET_CATEGORIES,
+  ADD_CATEGORY,
 } from "../types";
 
 //////////////////// articles ///////////////////
@@ -104,4 +106,15 @@ export const accountVerify = () => ({
 export const appLayout = (layout) => ({
   type: SITE_LAYOUT,
   payload: layout,
+});
+
+/////// categories ////////
+export const getCategories = (categories) => ({
+  type: GET_CATEGORIES,
+  payload: categories,
+});
+
+export const addCategory = (categories) => ({
+  type: ADD_CATEGORY,
+  payload: categories,
 });
